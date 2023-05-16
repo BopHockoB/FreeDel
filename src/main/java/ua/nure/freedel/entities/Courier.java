@@ -20,9 +20,6 @@ public class Courier {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @Column(name = "password", nullable = false, length = 256)
-    private String password;
-
     @Column(name = "courier_image", nullable = false)
     private String courierImage;
 
@@ -35,7 +32,7 @@ public class Courier {
     @Enumerated(EnumType.ORDINAL)
     private TransportType transportType;
 
-    @OneToMany(mappedBy = "courier")
-    private Set<Order> orders = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "courier")
+//    private Set<Order> orders = new LinkedHashSet<>();
 
 }

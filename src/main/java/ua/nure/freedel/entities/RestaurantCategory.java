@@ -4,15 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-public enum ProductCategory {
-    PIZZA,
-    SUSHI,
-    BURGERS,
-    PASTA,
+public enum RestaurantCategory {
+    ITALIAN,
+    FRENCH,
+    AMERICAN,
     CHINESE,
-    THAI,
     MEXICAN,
+    THAI,
     INDIAN,
-    FAST_FOOD,
-    STEAKS
+    JAPANESE,
+    STEAKHOUSE,
+    SEAFOOD
 }
