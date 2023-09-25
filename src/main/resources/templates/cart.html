@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="fragments :: boots_trap"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <meta charset="UTF-8">
+    <title>User Registration Form</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+
+    <div sec:authorize="isAuthenticated()" class="small-container cart-page">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Subtotal</th>
+            </tr>
+            <tr th:each="item : ${session.shoppingCart.items}">
+                <td>
+                    <div class="cart-info">
+                        <div>
+                            <p th:text="${item.product.name}"></p>
+                            <small th:text="${item.product.price}+'$'"></small>
+                            <form action="#" th:action="@{/cart/remove}" method="post">
+                                <input type="hidden" th:value="${item.product.id}" name="id"/>
+                                <button type="submit" class="btn btn-error">remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+                <td><span th:text="${item.product.price}"></span></td>
+                <td>
+                    <form action="#" th:action="@{/cart/update}" method="post">
+                        <input type="hidden" th:value="${item.product.id}" name="id"/>
+                        <input type="number" min="1" th:value="${item.quantity}" name="qty"/>
+                        <button type="submit" class="btn btn-success">update</button>
+                    </form>
+                </td>
+                <td><span th:text="${item.subTotal}+'$'"></span></td>
+            </tr>
+        </table>
+        <div class="total-price">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td>Total</td>
+                    <td th:text="${session.shoppingCart.total}"></td>
+                </tr>
+            </table>
+            <form action="#" th:action="@{/order/save}" method="post">
+                <label for="address-input" class="col-sm-2 col-form-label">Delivery address</label>
+                <div class="col-sm-6">
+                    <input type="text" id="address-input" name="address">
+                </div>
+                <button type="submit" class="btn btn-success">Submit Order</button>
+            </form>
+        </div>
+    </div>
+    <div sec:authorize="isAnonymous()" class="container"><h2>If you want to order products, login first. <a th:href="@{/login}">Click here</a></h2><br></div>
+
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUcgXkEdhMGjFNT-0LWJ4tbsYNjXE7FkQ&libraries=places"></script>
+<script>
+    var input = document.getElementById('address-input');
+
+    var options = {
+        componentRestrictions: { country: 'GB' }, // e.g., 'us' for the United States
+        language: 'en' // e.g., 'en' for English, 'fr' for French, etc.
+    };
+
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.addEventListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+        document.getElementById('address-input').value = place.formatted_address;
+    });
+</script>
+</body>

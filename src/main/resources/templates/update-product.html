@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+  <meta charset="UTF-8">
+  <title>Update Product</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5 mb-md-5">
+  <div th:replace="fragments :: nav_bar"></div>
+  <h2 class="m-4">Edit User</h2>
+  <form th:action="@{/restaurants/{restaurantId}/update/{id}(restaurantId=${product.restaurant.id}, id=${product.id})}"
+        method="post" th:object="${product}" class="px-4">
+    <input type="hidden" th:field="*{id}">
+    <div class="mb-3 row">
+      <label for="name" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-6">
+        <input type="text"  id="name" autofocus="autofocus"
+               class="form-control" required name="firstName" th:field="*{name}" >
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+      <div class="col-sm-6">
+        <input type="text"  id="amount" autofocus="autofocus"
+               class="form-control" required name="amount" th:field="*{amount}" >
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-6">
+        <input type="text"  id="description" autofocus="autofocus"
+               class="form-control" required name="description" th:field="*{description}" >
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="price" class="col-sm-2 col-form-label">Price</label>
+      <div class="col-sm-6">
+        <input type="number" step="any" min="0" id="Price" autofocus="autofocus"
+               class="form-control" required name="price" th:field="*{price}" >
+      </div>
+    </div>
+    <div>
+      <label for="available" class="col-sm-2 col-form-label">Available</label>
+      <input id="available" type="checkbox" name="available" th:checked="${product.available}" />
+    </div>
+    <div class="mb-3 row">
+      <label for="category" class="col-sm-2 col-form-label">Category</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="category" th:field="*{productCategory.id}">
+          <option th:each="category : ${categories}"
+              th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success">Update</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

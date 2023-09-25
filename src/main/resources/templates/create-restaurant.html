@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+  <meta charset="UTF-8">
+  <title>Create Restaurant</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5 mb-md-5">
+  <div th:replace="fragments :: nav_bar"></div>
+  <h2 class="m-4">Create Restaurant</h2>
+  <form th:action="@{/restaurants/create}" method="post" th:object="${restaurant}" class="px-4">
+    <div class="mb-3 row">
+      <label for="name" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-6">
+        <input type="text" id="name" autofocus="autofocus"
+               class="form-control" required th:field="*{name}">
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="address" class="col-sm-2 col-form-label">Address</label>
+      <div class="col-sm-6">
+        <input type="text" id="address" autofocus="autofocus"
+               class="form-control" required th:field="*{address}">
+      </div>
+    </div>
+
+
+    <div class="mb-3 row">
+      <label for="deliveryCommission" class="col-sm-2 col-form-label">Delivery Commission</label>
+      <div class="col-sm-6">
+        <input type="text" id="deliveryCommission" autofocus="autofocus"
+               class="form-control" required th:field="*{deliveryCommission}">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="category" class="col-sm-2 col-form-label">Category</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="category" th:field="*{restaurantCategory.id}">
+          <option th:each="category : ${categories}"
+                  th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success">Create Restaurant</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

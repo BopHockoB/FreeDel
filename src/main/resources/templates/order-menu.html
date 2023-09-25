@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title th:title="Order interface">Default Title</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+    <div class="row mt-2">
+        <div class="row mt-2">
+                <h2>Products</h2>
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Order number</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Recipient</th>
+                        <th scope="col">Total price</th>
+                        <th scope="col">Status</th>
+                        <th colspan="1">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><a th:text="${order.id}" href="#" th:href="@{/order/{id}(id=${order.id})}"></a></td>
+                        <td th:text="${order.address}"></td>
+                        <td th:text="${order.getUser().getFirstName + ' ' + order.getUser().getLastName()}"></td>
+                        <td th:text="${order.total}"></td>
+                        <td th:text="${order.status.name()}"></td>
+                        <td><a href="#" th:href="@{/login/couriers/{id}/{orderId}/change-status(id = ${courierId} , orderId=${order.id})}" class="btn btn-info">Change status</a></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

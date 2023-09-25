@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title>The Demo App</title>
+</head>
+
+<body>
+<div class="container offset-sm-2 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+    <div class="text-center">
+    <h2 class="m-lg-5">Welcome to our FreeDel </h2>
+    <a href="#" th:href="@{/login}" class="btn btn-block btn-info" style="width: 30%">Login</a>
+    <br><br>
+    <a href="#" th:href="@{/registration/registration-form}" class="btn btn-block btn-info" style="width: 30%">Registration</a>
+    </div>
+
+</div>
+</body>
+</html>

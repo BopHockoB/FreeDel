@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title th:title="Restaurant Orders">Default Title</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+    <div class="row mt-2">
+
+
+        <div class="orders">
+            <div class="row mt-2">
+                <h2 th:if="${#lists.isEmpty(orders)}">You don't have any orders yet</h2>
+                <div th:if="${not #lists.isEmpty(orders)}">
+                    <h2>Products</h2>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Order number</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Total price</th>
+                            <th scope="col">Status</th>
+                            <th colspan="1">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order : ${orders}">
+                            <td><a th:text="${order.id}" href="#" th:href="@{/order/{id}(id=${order.id})}"></a></td>
+                            <td th:text="${order.address}"></td>
+                            <td th:text="${order.total}"></td>
+                            <td th:text="${order.status.toString()}"></td>
+                            <td><a href="#" th:href="@{/login/restaurants/{id}/{orderId}(id = ${restaurantId} , orderId=${order.id})}" class="btn btn-info">Edit</a></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+  <meta charset="UTF-8">
+  <title>Update Restaurant</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5 mb-md-5">
+  <div th:replace="fragments :: nav_bar"></div>
+  <h2 class="m-4">Edit User</h2>
+  <form th:action="@{/restaurants/update/{id}(id=${restaurant.id})}" method="post" th:object="${restaurant}" class="px-4">
+    <input type="hidden" th:field="*{id}">
+    <div class="mb-3 row">
+      <label for="name" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-6">
+        <input type="text"  id="name" autofocus="autofocus"
+               class="form-control" required name="firstName" th:field="*{name}" >
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="address" class="col-sm-2 col-form-label">Address</label>
+      <div class="col-sm-6">
+        <input type="text"  id="address" autofocus="autofocus"
+               class="form-control" required name="" th:field="*{address}" >
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="deliveryCommission" class="col-sm-2 col-form-label">Delivery Commission</label>
+      <div class="col-sm-6">
+        <input type="text"  id="deliveryCommission" autofocus="autofocus"
+               class="form-control" required name="email" th:field="*{deliveryCommission}" >
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success">Update Restaurant</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

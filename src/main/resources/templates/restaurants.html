@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+    <div class="row mt-2">
+        <div th:if="${param.update_success}" class=" alert alert-info">
+            A Restaurant has been updated successfully.
+        </div>
+        <div th:if="${param.delete_success}" class=" alert alert-info">
+            A Restaurant has been deleted successfully.
+        </div>
+    </div>
+    <div th:switch="${restaurants}">
+        <h2 th:case="null">There are no restaurants to display</h2>
+        <div th:case="*">
+            <h2>All Restaurants</h2>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Average Preparation Time</th>
+                    <th scope="col">Delivery Commission</th>
+                    <th scope="col">Rate</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Is Working</th>
+                    <th scope="col">Category</th>
+
+                    <th colspan="2">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="restaurant : ${restaurants}">
+                    <td th:text="${restaurant.name}"></td>
+                    <td th:text="${restaurant.averagePrepTime}"></td>
+                    <td th:text="${restaurant.deliveryCommission}"></td>
+                    <td th:text="${restaurant.rate}"></td>
+                    <td th:text="${restaurant.address}"></td>
+                    <td th:text="${restaurant.isWorking}"></td>
+                    <td th:text="${restaurant.restaurantCategory.name}"></td>
+
+                    <td><a href="#" th:href="@{/restaurants/edit/{id}(id=${restaurant.id})}" class="btn btn-info">Edit</a></td>
+                    <td><a th:href="@{/restaurants/delete/{id}(id=${restaurant.id})}" class="btn btn-danger">Delete</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <a href="#" th:href="@{/restaurants/create}" class="btn btn-info">Create</a>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

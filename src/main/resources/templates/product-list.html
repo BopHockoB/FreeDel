@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+  <meta charset="UTF-8">
+  <title th:title="All products in ${title}">Default Title</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5">
+  <div th:replace="fragments :: nav_bar"></div>
+  <div class="row mt-2">
+    <h2 th:if="${#lists.isEmpty(products)}">There are no products yet</h2>
+    <div th:if="${not #lists.isEmpty(products)}">
+      <h2>Products</h2>
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Amount in set</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+          <td><a th:text="${product.name}" href="#" th:href="@{/product/{id}(id=${product.id})}"></a></td>
+          <td th:text="${product.amount}"></td>
+          <td th:text="${product.description}"></td>
+          <td th:text="${product.price}"></td>
+        </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+</div>
+</body>
+</html>

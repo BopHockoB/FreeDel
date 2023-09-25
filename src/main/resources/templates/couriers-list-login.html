@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title th:title="Couriers">Default Title</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+    <div class="row mt-2">
+        <h2 th:if="${#lists.isEmpty(couriers)}">You don't have any orders yet</h2>
+        <div th:if="${not #lists.isEmpty(couriers)}">
+            <h2>Couriers</h2>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Busy</th>
+                    <th colspan="1">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="courier : ${couriers}">
+                    <td th:text="${courier.firstName + ' ' + courier.lastName}"></td>                    <td th:text="${courier.email}"></td>
+                    <td th:text="${courier.phoneNumber}"></td>
+                    <td th:if="${courier.isBusy}" th:text="True"></td>
+                    <td th:if="${!courier.isBusy}" th:text="False"></td>
+
+                    <td><a href="#" th:href="@{/login/couriers/{id}(id = ${courier.id})}" class="btn btn-info">Login</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

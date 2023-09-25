@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+  <meta charset="UTF-8">
+  <title>Create Restaurant</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5 mb-md-5">
+  <div th:replace="fragments :: nav_bar"></div>
+  <h2 class="m-4">Create Product</h2>
+  <form th:action="@{/products/create}" method="post" th:object="${product}" class="px-4">
+    <div class="mb-3 row">
+      <label for="name" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-6">
+        <input type="text" id="name" autofocus="autofocus"
+               class="form-control" required th:field="*{name}">
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label for="amount" class="col-sm-2 col-form-label">Amount</label>
+      <div class="col-sm-6">
+        <input type="text" id="amount" autofocus="autofocus"
+               class="form-control" required th:field="*{amount}">
+      </div>
+    </div>
+
+
+    <div class="mb-3 row">
+      <label for="description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-6">
+        <input type="text" id="description" autofocus="autofocus"
+               class="form-control" required th:field="*{description}">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="price" class="col-sm-2 col-form-label">Price</label>
+      <div class="col-sm-6">
+        <input type="text" id="price" autofocus="autofocus"
+               class="form-control" required th:field="*{price}">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="category" class="col-sm-2 col-form-label">Category</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="category" th:field="*{productCategory.id}">
+          <option th:each="category : ${categories}"
+                  th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success">Create product</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

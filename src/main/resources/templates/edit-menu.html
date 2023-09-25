@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: boots_trap">
+  <meta charset="UTF-8">
+  <title>Edit menu</title>
+</head>
+<body>
+<div class="container col-md-offset-3 col-md-8 mt-lg-5">
+  <div th:replace="fragments :: nav_bar"></div>
+  <div class="row mt-2">
+    <div th:if="${param.update_success}" class=" alert alert-info">
+      A Product has been updated successfully.
+    </div>
+    <div th:if="${param.delete_success}" class=" alert alert-info">
+      A Product has been deleted successfully.
+    </div>
+  </div>
+  <h2 th:if="${#lists.isEmpty(products)}">There are no products yet</h2>
+  <div th:if="${not #lists.isEmpty(products)}">
+    <h2>Products</h2>
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Amount in set</th>
+        <th scope="col">Description</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th colspan="2">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.amount}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.available}"></td>
+        <td th:text="${product.productCategory.name}"></td>
+
+        <td><a href="#" th:href="@{/login/restaurants/{restaurantId}/switch-status/{id}(restaurantId=${restaurant.id}, id=${product.id})}" class="btn btn-info">Switch availability</a></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row mt-2">
+      <h3><a href="#" th:href="@{/login/restaurants/{restaurantId}/switch-status(restaurantId=${restaurant.id})}" class="btn btn-info">Switch working status</a></h3>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
